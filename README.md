@@ -15,3 +15,5 @@ This Python script automates the process of executing Google dork queries, which
 1. Clone the repository and install the required packages.
 2. Run the script using Python 3.
 3. Follow the prompts to enter the target site and select a category of interest.
+
+## DISCLAIMER: This tool is intended for educational purposes only. Always ensure you have permission before testing any website or application.
