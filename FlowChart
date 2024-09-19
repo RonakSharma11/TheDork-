@@ -1,0 +1,122 @@
++----------------------------------------------------------------------------------------+
+|                                         Start                                          |
++----------------------------------------------------------------------------------------+
+                                          |
+                                          v
++----------------------------------------------------------------------------------------+
+|                             Prompt user to enter website URL                           |
+|                       (e.g., "Enter the website you want to search")                   |
++----------------------------------------------------------------------------------------+
+                                          |
+                                          v
++----------------------------------------------------------------------------------------+
+|                 Display menu of categories for Google Dork queries (1-6):              |
+|                 (1) Sensitive Files and Directories                                    |
+|                 (2) Vulnerable Servers                                                 |
+|                 (3) Error Messages                                                     |
+|                 (4) Sensitive Information                                              |
+|                 (5) Vulnerable Web Applications                                        |
+|                 (6) Miscellaneous                                                      |
++----------------------------------------------------------------------------------------+
+                                          |
+                                          v
++----------------------------------------------------------------------------------------+
+|                   Prompt user to enter the number of the selected category             |
++----------------------------------------------------------------------------------------+
+                                          |
+                                          v
++-------------------------------+     +----------------------------+     +---------------------------+
+|     Category == 1?             |     |     Category == 2?          |     |     Category == 3?         |
+|     (Sensitive Files &         |---->|     (Vulnerable Servers)    |---->|     (Error Messages)       |
+|     Directories)               |     |                            |     |                            |
++-------------------------------+     +----------------------------+     +---------------------------+
+      |                                |                                |                               |
+      v                                v                                v                               v
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+|  Generate queries for:         | | Generate queries for:         | | Generate queries for:        | | Generate queries for:       |
+|  Sensitive Files & Directories | | Vulnerable Servers            | | Error Messages               | | Sensitive Information       |
+|  - site:example.com intitle:   | | - site:example.com "powered   | | - site:example.com "Warning: | | - site:example.com "username|
+|    index of /concrete/Password | |   by phpMyAdmin"              | |   Cannot modify header"      | |   password login"           |
+|  - site:example.com intext:    | | - site:example.com "powered   | | - site:example.com "SQL      | | - site:example.com "email   |
+|    'userfiles' intitle:'Index  | |   by IIS"                     | |   syntax near"               | |   password login"           |
+|    Of'                        | | - site:example.com "powered   | | - site:example.com "Uncaught | | - site:example.com "userid  |
+|  - site:example.com inurl:ssh  | |   by Apache"                  | |   exception"                 | |   password login"           |
+|    intitle:index of /files     | | - site:example.com "powered   | |                               | |                              |
++-------------------------------+ |   by Tomcat"                  | +-----------------------------+ +----------------------------+
+                                   |                                |                                |
+                                   v                                v                                v
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+|   Display queries for category | |   Display queries for category| |  Display queries for category| |  Display queries for category|
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+                                   |                                |                                |
+                                   v                                v                                v
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+|   Call search_dorks(query)     | |   Call search_dorks(query)    | |  Call search_dorks(query)    | |  Call search_dorks(query)   |
+|   for each query in category   | |   for each query in category  | |  for each query in category  | |  for each query in category |
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+                                   |                                |                                |
+                                   v                                v                                v
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+|    Loop through URLs returned  | |    Loop through URLs returned | |   Loop through URLs returned | |   Loop through URLs returned|
+|    for each query              | |    for each query            | |   for each query             | |   for each query            |
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+                                   |                                |                                |
+                                   v                                v                                v
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+|     Print URLs for category    | |    Print URLs for category    | |    Print URLs for category   | |    Print URLs for category  |
++-------------------------------+ +------------------------------+ +-----------------------------+ +----------------------------+
+
+                                          |
+                                          v
++-------------------------------+     +----------------------------+
+|     Category == 4?             |     |     Category == 5?          |
+|     (Sensitive Information)    |---->|     (Vulnerable Web Apps)   |
++-------------------------------+     +----------------------------+
+      |                                |  
+      v                                v
++-------------------------------+ +------------------------------+
+| Generate queries for:          | | Generate queries for:         |
+| Vulnerable Web Apps            | | Miscellaneous Dorks           |
+| - site:example.com powered by  | | - site:example.com inurl:     |
+|   Joomla inurl:com_            | |   example.com                |
+| - site:example.com powered by  | | - site:example.com intitle:   |
+|   WordPress inurl:wp-content   | |   example.com                |
+| - site:example.com powered by  | | - site:example.com cache:     |
+|   Drupal inurl:modules         | |   example.com                |
++-------------------------------+ +------------------------------+
+                                   |                                |
+                                   v                                v
++-------------------------------+ +------------------------------+
+|   Display queries for category | |   Display queries for category|
++-------------------------------+ +------------------------------+
+                                   |                                |
+                                   v                                v
++-------------------------------+ +------------------------------+
+|   Call search_dorks(query)     | |   Call search_dorks(query)    |
+|   for each query in category   | |   for each query in category  |
++-------------------------------+ +------------------------------+
+                                   |                                |
+                                   v                                v
++-------------------------------+ +------------------------------+
+|    Loop through URLs returned  | |    Loop through URLs returned |
+|    for each query              | |    for each query             |
++-------------------------------+ +------------------------------+
+                                   |                                |
+                                   v                                v
++-------------------------------+ +------------------------------+
+|     Print URLs for category    | |    Print URLs for category    |
++-------------------------------+ +------------------------------+
+
+                                          |
+                                          v
++----------------------------------------------------------------------------------------+
+|                                   Invalid Category?                                    |
+|                           (If number not in 1-6, print error)                         |
++----------------------------------------------------------------------------------------+
+                                          |
+                                          v
++----------------------------------------------------------------------------------------+
+|                                            End                                         |
++----------------------------------------------------------------------------------------+
+
+
