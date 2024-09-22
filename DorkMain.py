@@ -31,25 +31,28 @@ def perform_search():
             f"{site_query_prefix}inurl:ssh intitle:index of /files",
         ],
         "2": [
-            f"{site_query_prefix}\"powered by phpMyAdmin\"",
-            f"{site_query_prefix}\"powered by IIS\"",
-            f"{site_query_prefix}\"powered by Apache\"",
-            f"{site_query_prefix}\"powered by Tomcat\""
+            f"{site_query_prefix}intitle:'SSL Network Extender Login' -checkpoint.com",
+            f"{site_query_prefix}intitle:'Apache Struts 2.5' 'index of /' -git",
+            f"{site_query_prefix}inurl: /editor/filemanager/connectors/uploadtest.html",
+            f"{site_query_prefix}inurl:'/user/register' 'Powered by Drupal' -CAPTCHA -'Access denied'"
         ],
         "3": [
-            f"{site_query_prefix}\"Warning: Cannot modify header information\"",
-            f"{site_query_prefix}\"SQL syntax near\"",
-            f"{site_query_prefix}\"Uncaught exception\""
+            f"{site_query_prefix}intitle:'index of' 'stacktrace.log'",
+            f"{site_query_prefix}intitle:'index of' 'my-errors.log'' OR 'my-errors.logs'",
+            f"{site_query_prefix}inurl:'index.php?id=' intext:'Warning: mysql_num_rows()'"
+            f"{site_query_prefix}inurl:('/storage/logs/laravel.log') AND intext:('local.ERROR' | 'NULL.ERROR' | 'EMERGENCY:')"
         ],
         "4": [
-            f"{site_query_prefix}\"username\" \"password\" \"login\"",
-            f"{site_query_prefix}\"email\" \"password\" \"login\"",
-            f"{site_query_prefix}\"userid\" \"password\" \"login\""
+            f"{site_query_prefix}intitle:'index of' 'pass.txt'",
+            f"{site_query_prefix}(site:jsonformatter.org | site:codebeautify.org) & (intext:aws | intext:bucket | intext:password | intext:secret | intext:username)",
+            f"{site_query_prefix}allintext:username,password filetype:log"
+            f"{site_query_prefix}intext:(password | passcode) intext:(username | userid | user) filetype:csv"
         ],
         "5": [
-            f"{site_query_prefix}\"powered by Joomla\" inurl:com_",
-            f"{site_query_prefix}\"powered by WordPress\" inurl:wp-content",
-            f"{site_query_prefix}\"powered by Drupal\" inurl:modules"
+            f"{site_query_prefix}intitle:'ZAP Scanning Report' + 'Alert Detail'",
+            f"{site_query_prefix}intitle:'Skipfish - scan results browser'",
+            f"{site_query_prefix}-site:'pentest-tools.com' intext:'Scan coverage information' AND 'List of tests' ext:PDF"
+            f"{site_query_prefix}inurl:'/Serviceability?adapter=device.statistics.configuration'"
         ],
         "6": [
             f"{site_query_prefix}\"site:{target_site}\"",
@@ -60,7 +63,7 @@ def perform_search():
     }
 
     result_text.delete(1.0, tk.END)  # Clear previous results
-    loading_screen()  # Show loading screen
+    loading_window()  # Show loading screen
 
     for query in queries[category]:
         result_text.insert(tk.END, query + "\n")
@@ -71,14 +74,14 @@ def perform_search():
     loading_window.destroy()  # Close loading screen
 
 
-def loading_screen():
-    global loading_window
-    loading_window = tk.Toplevel(root)
-    loading_window.title("Loading...")
-    loading_window.geometry("300x100")
-    loading_window.configure(bg='black')
+def loading_window():
+    global load_win
+    load_win = tk.Toplevel(root)
+    load_win.title("Loading...")
+    load_win.geometry("300x100")
+    load_win.configure(bg='black')
 
-    label_loading = tk.Label(loading_window, text="Searching...", bg='black', fg='gold', font=("Helvetica", 16))
+    label_loading = tk.Label(load_win, text="Searching...", bg='black', fg='gold', font=("Helvetica", 16))
     label_loading.pack(expand=True)
 
 
@@ -101,7 +104,7 @@ label_category.pack()
 
 category_var = tk.StringVar(value="")
 categories = ["Sensitive Files and Directories", "Vulnerable Servers", "Error Messages",
-              "Sensitive Information", "Vulnerable Web Applications", "Miscellaneous"]
+              "Sensitive Information", "Network or Vulnerability Data", "Miscellaneous"]
 for index, category in enumerate(categories, start=1):
     rb = tk.Radiobutton(frame, text=category, variable=category_var, value=str(index), bg='black', fg='gold',
                         selectcolor='black')
